@@ -4,9 +4,10 @@
 
 <body>
   <main>
-    <h1>Zendoc</h1>
+    <h1>PDF Reader App</h1>
 
     {{> uploader}}
+    {{> pdf_list}}
   </main>
 </body>
 
@@ -15,4 +16,8 @@
     <div class="uploader">
       {{> upload_bootstrap contentType='pdfs' fileTypes='.pdf' multiple=true }}
     </div>
+</template>
+
+<template name="pdf_list">
+	<h3>List of PDF's</h3>
 </template>
