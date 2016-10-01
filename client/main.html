@@ -1,0 +1,18 @@
+<head>
+  <title>Zedoc</title>
+</head>
+
+<body>
+  <main>
+    <h1>Zendoc</h1>
+
+    {{> uploader}}
+  </main>
+</body>
+
+<template name="uploader">
+    <h3>PDF's</h3>
+    <div class="uploader">
+      {{> upload_bootstrap contentType='pdfs' fileTypes='.pdf' multiple=true }}
+    </div>
+</template>
