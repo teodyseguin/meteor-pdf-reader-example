@@ -1,0 +1,11 @@
+{
+  "name": "zendoc",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "meteor-node-stubs": "~0.2.0",
+    "path": "^0.12.7"
+  }
+}
