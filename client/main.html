@@ -5,9 +5,8 @@
 <body>
   <main>
     <h1>PDF Reader App</h1>
-
+    {{> status}}
     {{> uploader}}
-    {{> pdf_list}}
   </main>
 </body>
 
@@ -18,6 +17,8 @@
     </div>
 </template>
 
-<template name="pdf_list">
-	<h3>List of PDF's</h3>
+<template name="status">
+  <a href="#">{{ pdfUploaded }}</a> Uploaded <br />
+  <a href="#">{{ pdfInProgress }}</a> In Progress <br />
+  <a href="#">{{ pdfComplete }}</a> Complete <br />
 </template>
