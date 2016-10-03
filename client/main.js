@@ -2,18 +2,32 @@ import { Template } from 'meteor/templating';
 
 import './main.html';
 
-Template.uploader.events({
-	'change input[type="file"]'(event, instance) {
-	    let func = this,
-	        files = event.currentTarget.files[0],
-	        reader = new FileReader();
+Template.status.onCreated(function() {
+	let self = this;
 
-	    // reader.onload = function(fileLoadEvent) {
-	    //   console.log(files);
-	    //   console.log(reader.result);
-	    //   Meteor.call('file-upload', files, reader.result);
-	    // }
+	self.complete = new ReactiveVar();
+	self.inProgress = new ReactiveVar();
+	self.list = new ReactiveVar();
 
-	    // reader.readAsBinaryString(files);
+	Meteor.call('pdfComplete', (err, res) => {
+		self.complete.set(res);
+	});
+	Meteor.call('pdfList', (err, res) => {
+		self.list.set(res);
+	});
+	Meteor.call('pdfInProgress', (err, res) => {
+		self.inProgress.set(res);
+	})
+});
+
+Template.status.helpers({
+	pdfComplete: function() {
+		return Template.instance().complete.get();
+	},
+	pdfInProgress: function() {
+		return Template.instance().inProgress.get();
+	},
+	pdfUploaded: function() {
+		return Template.instance().list.get();
 	}
 });
