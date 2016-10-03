@@ -1,14 +1,44 @@
 import { Meteor } from 'meteor/meteor';
 
 // npm packages
-import path from 'path';
+import shelljs from 'shelljs/global';
 
 Meteor.startup(() => {
-	let absolutePath = path.join('../');
-
 	UploadServer.init({
-		tmpDir: Meteor.rootPath + '/.uploads/tmp',
-		uploadDir: Meteor.rootPath + '/.uploads',
+		tmpDir: '/.uploads/tmp',
+		uploadDir: '/.uploads',
 		checkCreateDirectories: true
 	});
+
+	createCompleteFolder();
 });
+
+Meteor.methods({
+	'pdfList'() {
+		return listFiles('/.uploads/complete/*.pdf').length + listFiles('/.uploads/inprogress/*.pdf').length + listFiles('/.uploads/*.pdf').length;
+	},
+	'pdfComplete'() {
+		return listFiles('/.uploads/complete/*.pdf').length;
+	},
+	'pdfInProgress'() {
+		return listFiles('/.uploads/inprogress/*.pdf').length;
+	}
+});
+
+function listFiles(location) {
+	let files = [];
+
+	ls(location).forEach(file => {
+		files.push(file);
+	});
+
+	return files;
+}
+
+function createCompleteFolder() {
+	let files = listFiles('/.uploads');
+
+	if (!files['complete']) {
+		mkdir('/.uploads/complete');
+	}
+}
