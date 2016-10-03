@@ -5,7 +5,8 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "meteor-node-stubs": "~0.2.0",
-    "path": "^0.12.7"
+    "meteor-node-stubs": "^0.2.3",
+    "path": "^0.12.7",
+    "shelljs": "^0.7.4"
   }
 }
