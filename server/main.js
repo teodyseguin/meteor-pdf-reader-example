@@ -15,13 +15,30 @@ Meteor.startup(() => {
 
 Meteor.methods({
 	'pdfList'() {
-		return listFiles('/.uploads/complete/*.pdf').length + listFiles('/.uploads/inprogress/*.pdf').length + listFiles('/.uploads/*.pdf').length;
+		let all = listFiles('/.uploads/*.pdf'),
+			inProgress = listFiles('/.uploads/inprogress/*.pdf'),
+			complete = listFiles('/.uploads/complete/*.pdf');
+
+		return {
+			files: all.concat(inProgress, complete),
+			count: all.length + inProgress.length + complete.length
+		};
 	},
 	'pdfComplete'() {
-		return listFiles('/.uploads/complete/*.pdf').length;
+		let all = listFiles('/.uploads/complete/*.pdf');
+
+		return {
+			files: all,
+			count: all.length
+		};
 	},
 	'pdfInProgress'() {
-		return listFiles('/.uploads/inprogress/*.pdf').length;
+		let all = listFiles('/.uploads/inprogress/*.pdf');
+
+		return {
+			files: all,
+			count: all.length
+		};
 	}
 });
 
