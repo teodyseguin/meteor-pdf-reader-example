@@ -1,5 +1,5 @@
 {
-  "name": "zendoc",
+  "name": "app",
   "private": true,
   "scripts": {
     "start": "meteor run"
@@ -7,6 +7,7 @@
   "dependencies": {
     "meteor-node-stubs": "^0.2.3",
     "path": "^0.12.7",
-    "shelljs": "^0.7.4"
+    "shelljs": "^0.7.4",
+    "xml2js": "^0.4.17"
   }
 }
