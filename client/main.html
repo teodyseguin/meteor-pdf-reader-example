@@ -2,23 +2,77 @@
   <title>Meteor PDF Reader Example</title>
 </head>
 
-<body>
-  <main>
-    <h1>PDF Reader App</h1>
-    {{> status}}
-    {{> uploader}}
-  </main>
-</body>
+<template name="mainLayout">
+  <body>
+    <main>
+      <header>
+        <h1>
+          <a href="/">PDF Reader App</a>
+        </h1>
+      </header>
 
-<template name="uploader">
-    <h3>PDF's</h3>
+      {{> Template.dynamic template=content}}
+    </main>
+
+    <footer></footer>
+  </body>
+</template>
+
+<template name="mainContent">
+    <label>Upload new PDF</label>
     <div class="uploader">
       {{> upload_bootstrap contentType='pdfs' fileTypes='.pdf' multiple=true }}
     </div>
+
+    <br />
+
+    <p>
+      <a href="/pdfs">
+        {{ pdfUploaded.count }} Uploaded
+      </a><br />
+
+      <a href="/pdfs/inprogress">
+        {{ pdfInProgress.count }} In Progress
+      </a><br />
+
+      <a href="/pdfs/complete">
+        {{ pdfComplete.count }} Complete
+      </a>
+    </p>
 </template>
 
-<template name="status">
-  <a href="#">{{ pdfUploaded }}</a> Uploaded <br />
-  <a href="#">{{ pdfInProgress }}</a> In Progress <br />
-  <a href="#">{{ pdfComplete }}</a> Complete <br />
+<template name="pdfsAll">
+  List of all pdf's
+  <ul class="pdflist">
+    {{#each file in list.files}}
+      <li>
+        {{ file }} <br />
+        <a href="#">View</a>
+      </li>
+    {{/each}}
+  </ul>
+</template>
+
+<template name="pdfsInProgress">
+  List of all pdf's
+  <ul class="pdflist">
+    {{#each file in list.files}}
+      <li>
+        {{ file }}
+        <a href="#">View</a>
+      </li>
+    {{/each}}
+  </ul>
+</template>
+
+<template name="pdfsComplete">
+  List of all pdf's
+  <ul class="pdflist">
+    {{#each file in list.files}}
+      <li>
+        {{ file }}
+        <a href="#">View</a>
+      </li>
+    {{/each}}
+  </ul>
 </template>
