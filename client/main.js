@@ -2,32 +2,77 @@ import { Template } from 'meteor/templating';
 
 import './main.html';
 
-Template.status.onCreated(function() {
-	let self = this;
+let list = new ReactiveVar(),
+	complete = new ReactiveVar(),
+	inProgress = new ReactiveVar();
 
-	self.complete = new ReactiveVar();
-	self.inProgress = new ReactiveVar();
-	self.list = new ReactiveVar();
-
-	Meteor.call('pdfComplete', (err, res) => {
-		self.complete.set(res);
-	});
-	Meteor.call('pdfList', (err, res) => {
-		self.list.set(res);
-	});
-	Meteor.call('pdfInProgress', (err, res) => {
-		self.inProgress.set(res);
-	})
+Meteor.call('pdfList', (err, res) => {
+	list.set(res);
+});
+Meteor.call('pdfComplete', (err, res) => {
+	complete.set(res);
+});
+Meteor.call('pdfInProgress', (err, res) => {
+	inProgress.set(res);
 });
 
-Template.status.helpers({
+Template.mainContent.helpers({
 	pdfComplete: function() {
-		return Template.instance().complete.get();
+		return complete.get();
 	},
 	pdfInProgress: function() {
-		return Template.instance().inProgress.get();
+		return inProgress.get();
 	},
 	pdfUploaded: function() {
-		return Template.instance().list.get();
+		return list.get();
+	}
+});
+
+Template.pdfsAll.helpers({
+	list: function() {
+		return list.get();
+	}
+});
+
+Template.pdfsInProgress.helpers({
+	list: function() {
+		return inProgress.get();
+	}
+});
+
+Template.pdfsComplete.helpers({
+	list: function() {
+		return complete.get();
+	}
+});
+
+FlowRouter.route('/', {
+	action: () => {
+		BlazeLayout.render('mainLayout', { content: 'mainContent' });
+	}
+});
+
+let pdfs = FlowRouter.group({
+	prefix: '/pdfs'
+});
+
+pdfs.route('/', {
+	name: 'pdfs.all',
+	action: () => {
+		BlazeLayout.render('mainLayout', { content: 'pdfsAll' });
+	}
+});
+
+pdfs.route('/inprogress', {
+	name: 'pdfs.inprogress',
+	action: () => {
+		BlazeLayout.render('mainLayout', { content: 'pdfsInProgress' });
+	}
+});
+
+pdfs.route('/complete', {
+	name: 'pdfs.complete',
+	action: () => {
+		BlazeLayout.render('mainLayout', { content: 'pdfsComplete' });
 	}
 });
