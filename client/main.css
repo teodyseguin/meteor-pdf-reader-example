@@ -14,3 +14,17 @@ main {
 .uploader {
 	width: 350px;
 }
+
+.pdflist {
+	list-style: none;
+	padding: 0;
+}
+
+.pdflist li {
+	display: inline-block;
+	width: 200px;
+	height: 100px;
+	border: 1px solid #cccccc;
+	padding: 10px;
+	margin-bottom: 10px;
+}
