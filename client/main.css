@@ -23,8 +23,53 @@ main {
 .pdflist li {
 	display: inline-block;
 	width: 200px;
-	height: 100px;
-	border: 1px solid #cccccc;
+	height: 110px;
 	padding: 10px;
 	margin-bottom: 10px;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	border-bottom: 3px solid #cccccc;
+}
+
+a.start,
+a.continue,
+a.view {
+	display: inline-block;
+	padding: 5px 20px;
+	color: #333333;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #cccccc;
+	text-transform: uppercase;
+}
+
+a.start:hover,
+a.continue:hover,
+a.view:hover {
+	text-decoration: none;
+}
+
+a.start {
+	color: #ffffff;
+	background-color: #147f54;
+}
+
+i.fa {
+	font-size: 40px;
+}
+
+.button-inline {
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+	display: block;
+}
+
+.button-inline a.start,
+.button-inline a.continue {
+	float: left;
+}
+
+.button-inline a.view {
+	float: right;
 }
