@@ -15,13 +15,11 @@ Meteor.startup(() => {
 
 Meteor.methods({
 	'pdfList'() {
-		let all = listFiles('/.uploads/*.pdf'),
-			inProgress = listFiles('/.uploads/inprogress/*.pdf'),
-			complete = listFiles('/.uploads/complete/*.pdf');
+		let all = listFiles('/.uploads/*.pdf');
 
 		return {
-			files: all.concat(inProgress, complete),
-			count: all.length + inProgress.length + complete.length
+			files: all,
+			count: all.length
 		};
 	},
 	'pdfComplete'() {
