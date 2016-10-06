@@ -1,0 +1,145 @@
+<template name="pdfsId">
+  <h2>Response ID </h2>
+  
+  <!-- Templated PDF form -->
+  <section id="blank-pdf-template">
+
+  	<article>
+  		<p><strong>Please tick on the appropriate faces</strong><br />
+
+		  	<ul>
+		  		<li>Very Good</li>
+		  		<li>Good</li>
+		  		<li>Fair</li>
+		  		<li>Poor</li>
+		  	</ul>
+	  	</p>
+
+	  	<p>
+	  		<strong>Admission Services</strong><br />
+
+	  		<ul>
+	  			<li>Happy</li>
+	  			<li>Satisfied</li>
+	  			<li>Unsatisfied</li>
+	  			<li>Disappointed</li>
+	  		</ul>
+	  	</p>
+
+	  	<p>
+	  		<strong>Friendliness of Doctors</strong><br />
+
+	  		<ul>
+	  			<li>Happy</li>
+	  			<li>Satisfied</li>
+	  			<li>Unsatisfied</li>
+	  			<li>Disappointed</li>
+	  		</ul>
+	  	</p>
+
+	  	<p>
+	  		<strong>Friendliness of Nurses</strong><br />
+
+	  		<ul>
+	  			<li>Happy</li>
+	  			<li>Satisfied</li>
+	  			<li>Unsatisfied</li>
+	  			<li>Disappointed</li>
+	  		</ul>
+	  	</p>
+
+	  	<p>
+	  		<strong>Friendliness of Allied Health (Therapist, Dietician, Pharmacis, Medical Social Worker, etc</strong><br />
+
+	  		<ul>
+	  			<li>Happy</li>
+	  			<li>Satisfied</li>
+	  			<li>Unsatisfied</li>
+	  			<li>Disappointed</li>
+	  		</ul>
+	  	</p>
+
+	  	<p>
+	  		<strong>Cleanliness of Accommodation</strong><br />
+
+	  		<ul>
+	  			<li>Happy</li>
+	  			<li>Satisfied</li>
+	  			<li>Unsatisfied</li>
+	  			<li>Disappointed</li>
+	  		</ul>
+	  	</p>
+
+	  	<p>
+	  		<strong>Quality of Food & Drinks</strong><br />
+
+	  		<ul>
+	  			<li>Happy</li>
+	  			<li>Satisfied</li>
+	  			<li>Unsatisfied</li>
+	  			<li>Disappointed</li>
+	  		</ul>
+	  	</p>
+
+	  	<p>
+	  		<strong>Discharge Services</strong><br />
+
+	  		<ul>
+	  			<li>Happy</li>
+	  			<li>Satisfied</li>
+	  			<li>Unsatisfied</li>
+	  			<li>Disappointed</li>
+	  		</ul>
+	  	</p>
+  	</article>
+
+  	<article>
+  		<p><strong>Please let us know more about yourself</strong></p>
+
+  		<form>
+  			<label>First Name</label><br />
+  			<input type="text" value="" /> <br />
+
+  			<label>Surname</label><br />
+  			<input type="text" value="" /><br />
+
+  			<label>I stay in Ward</label><br />
+  			<input type="text" value="" />
+  		</form>
+  	</article>
+
+  	<article>
+  		<p><strong>Do you wish to comment on the service of any of our staff?</strong></p>
+
+  		<ul>
+  			<li><a href="#compliment">Compliment</a></li>
+  			<li><a href="#complaint">Complaint</a></li>
+  		</ul>
+
+  		<p id="compliment">
+  			<textarea rows="4" cols="50">
+  			</textarea>
+  		</p>
+
+  		<p id="complaint">
+  			<textarea rows="4" cols="50">
+  			</textarea>
+  		</p>
+
+  		<p>
+  			<input type="checkbox" /><strong>I want to provide more information. Please contact me.</strong><br />
+  			<input type="checkbox" /><strong>I would like to attend the patient focus group.</strong>
+  		</p>
+  	</article>
+
+  	<p>
+  		<button>Save Response</button> <button>Cancel</button>
+  	</p>
+
+  </section>
+
+  <!-- Original Uploaded PDF -->
+  <canvas id="pdfcanvas">
+  	Uploaded original PDF file will be shown here
+  </canvas>
+</template>
