@@ -5,6 +5,18 @@ main {
 	margin: 0 auto;
 }
 
+main a:hover,
+main a:link,
+main a:active {
+	text-decoration: none;
+}
+
+h1 a:hover,
+h1 a:link,
+h1 a:active {
+	text-decoration: none;
+}
+
 @media screen and (min-width: 960px) {
 	main {
 		width: 960px;
@@ -24,7 +36,7 @@ main {
 	display: inline-block;
 	width: 200px;
 	height: 110px;
-	padding: 10px;
+	padding: 15px;
 	margin-bottom: 10px;
 	background-color: #ffffff;
 	border: 1px solid #cccccc;
@@ -45,8 +57,14 @@ a.view {
 }
 
 a.start:hover,
+a.start:link,
+a.start:active,
 a.continue:hover,
-a.view:hover {
+a.continue:link,
+a.continue:active,
+a.view:hover,
+a.view:link,
+a.view:active {
 	text-decoration: none;
 }
 
@@ -73,4 +91,17 @@ i.fa {
 
 .button-inline a.view {
 	float: right;
+}
+
+#blank-pdf-template {
+	float: left;
+	width: 45%;
+	display: block;
+}
+
+#pdfcanvas {
+	float: right;
+	width: 45%;
+	display: block;
+	border: 1px solid #cccccc;
 }
