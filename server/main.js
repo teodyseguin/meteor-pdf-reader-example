@@ -13,7 +13,13 @@ Meteor.startup(() => {
 	UploadServer.init({
 		tmpDir: '/.uploads/tmp',
 		uploadDir: '/.uploads',
-		checkCreateDirectories: true
+		checkCreateDirectories: true,
+		finished: (fileInfo, formFields) => {
+			// insertToDb()
+			// getTheRecordId();
+			// renameTheUploadedFile();
+			console.log(fileInfo);
+		}
 	});
 
 	// we also create a complete/ folder in which
