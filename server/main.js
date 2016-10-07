@@ -11,8 +11,8 @@ import fs from 'fs';
  */
 Meteor.startup(() => {
 	UploadServer.init({
-		tmpDir: '/.uploads/tmp',
-		uploadDir: '/.uploads',
+		tmpDir: '~/.uploads/tmp',
+		uploadDir: '~/.uploads',
 		checkCreateDirectories: true,
 		finished: (fileInfo, formFields) => {
 			// insertToDb()
