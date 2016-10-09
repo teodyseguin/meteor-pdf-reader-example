@@ -82,16 +82,14 @@
       	<article>
       		<p><strong>Please let us know more about yourself</strong></p>
 
-      		<form>
-      			<label>First Name</label><br />
-      			<input type="text" value="" /> <br />
+    			<label>First Name</label><br />
+    			<input type="text" name="firstname" value="" /> <br />
 
-      			<label>Surname</label><br />
-      			<input type="text" value="" /><br />
+    			<label>Surname</label><br />
+    			<input type="text" name="surname" value="" /><br />
 
-      			<label>I stay in Ward</label><br />
-      			<input type="text" value="" />
-      		</form>
+    			<label>I stay in Ward</label><br />
+    			<input type="text" name="stay" value="" />
       	</article>
 
       	<article>
@@ -103,23 +101,25 @@
       		</ul>
 
       		<p id="compliment">
-      			<textarea rows="4" cols="50">
+      			<textarea name="compliment" rows="4" cols="50">
       			</textarea>
       		</p>
 
       		<p id="complaint">
-      			<textarea rows="4" cols="50">
+      			<textarea name="complaint" rows="4" cols="50">
       			</textarea>
       		</p>
 
       		<p>
-      			<input type="checkbox" /><strong> I want to provide more information. Please contact me.</strong><br />
-      			<input type="checkbox" /><strong> I would like to attend the patient focus group.</strong>
+      			<input type="checkbox" name="providemoreinfo" id="providemoreinfo" />
+            <strong> I want to provide more information. Please contact me.</strong><br />
+      			<input type="checkbox" name="attendpatientfocusgroup" id="attendpatientfocusgroup" />
+            <strong> I would like to attend the patient focus group.</strong>
       		</p>
       	</article>
 
       	<p>
-      		<input type="submit" value="Save Response" /> <input type="button" value="Cancel" />
+      		<input type="button" value="Save Response" id="save-response" /> <input type="button" value="Cancel" />
       	</p>
     </form>
   </section>
