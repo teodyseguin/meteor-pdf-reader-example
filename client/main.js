@@ -1,32 +1,25 @@
 import { Template } from 'meteor/templating';
 
+import _ from 'lodash';
+
 import './main.html';
 
-let complete = new ReactiveVar(),
-	inProgress = new ReactiveVar(),
-	list = new ReactiveVar();
-
-Meteor.call('pdfList', (err, res) => {
-	list.set(res);
-});
-
-Meteor.call('pdfComplete', (err, res) => {
-	complete.set(res);
-});
-
-Meteor.call('pdfInProgress', (err, res) => {
-	inProgress.set(res);
+Template.mainContent.onCreated(function() {
+	Meteor.subscribe('list.pdfs', ['uploaded', 'inprogress', 'complete']);
 });
 
 Template.mainContent.helpers({
 	pdfComplete: function() {
-		return complete.get();
+		let result = Uploads.find().fetch();
+		return _.filter(result, ['status', 'complete']).length;
 	},
 	pdfInProgress: function() {
-		return inProgress.get();
+		let result = Uploads.find().fetch();
+		return _.filter(result, ['status', 'inprogress']).length;
 	},
 	pdfUploaded: function() {
-		return list.get();
+		let result = Uploads.find().fetch();
+		return _.filter(result, ['status', 'uploaded']).length;
 	}
 });
 
