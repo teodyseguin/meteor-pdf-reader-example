@@ -18,7 +18,13 @@ class DB {
 				return callback(err);
 			}
 
-			cls.save();
+			cls.save(function(err, id) {
+				if (err) {
+					return callback(err);
+				}
+
+				return callback(null, id);
+			});
 		});
 	}
 }
