@@ -1,9 +1,14 @@
+// meteor packages
 import { Meteor } from 'meteor/meteor';
 
 // npm packages
 import shelljs from 'shelljs/global';
 import pdfjsDist from 'pdfjs-dist';
 import fs from 'fs';
+import _ from 'lodash';
+
+// custom module
+import { DbService } from '../imports/services/db.js';
 
 /**
  * On startup of the server, we need to create
@@ -11,54 +16,46 @@ import fs from 'fs';
  */
 Meteor.startup(() => {
 	UploadServer.init({
-		tmpDir: '~/.uploads/tmp',
-		uploadDir: '~/.uploads',
+		tmpDir: '/.uploads/tmp',
+		uploadDir: '/.uploads',
 		checkCreateDirectories: true,
 		finished: (fileInfo, formFields) => {
-			// insertToDb()
+			let upload = new Upload();
+			upload.filename = fileInfo.name;
+
+			DbService.save(upload, function response(err, result) {
+				if (err) {
+					console.log('Something went wrong. Deleting ' + fileInfo.name);
+					rm('/.uploads/' + fileInfo.name);
+					console.log(err);
+					return;
+				}
+			});
 			// getTheRecordId();
 			// renameTheUploadedFile();
-			console.log(fileInfo);
 		}
 	});
 
-	// we also create a complete/ folder in which
-	// we intend to copy all pdf's that are complete
-	// scanned already
-	createCompleteFolder();
+	// we create some folders here and they are the
+	// - complete/
+	// - inprogress/
+	createFolders();
 });
 
-/**
- * List of methods that can be called from the client side
- * The soul purpose of each of these methods are to provide
- * the list of pdf filenames and their total number, depending
- * on which folder they are currently in
- */
-Meteor.methods({
-	'pdfList'() {
-		return listFiles('/.uploads/*.pdf', true, (result) => {
-			return {
-				files: result,
-				count: result.length
-			};
-		});
-	},
-	'pdfComplete'() {
-		return listFiles('/.uploads/complete/*.pdf', true, (result) => {
-			return {
-				files: result,
-				count: result.length
-			};
-		});
-	},
-	'pdfInProgress'() {
-		return listFiles('/.uploads/inprogress/*.pdf', true, (result) => {
-			return {
-				files: result,
-				count: result.length
-			};
-		});
-	}
+Meteor.publish('list.pdfs', function(status) {
+	return Uploads.find(
+		{
+			_id: { 
+				$exists: true 
+			},
+			status: {
+				$in: status
+			}
+		},
+		{
+			fields: Uploads.publicFields
+		}
+	);
 });
 
 function listFiles(location, pdfOnly, callback) {
@@ -85,10 +82,14 @@ function listFiles(location, pdfOnly, callback) {
 	return callback(files);
 }
 
-function createCompleteFolder() {
+function createFolders() {
 	listFiles('/.uploads', false, (result) => {
-		if (!result['complete']) {
+		if (!_.find(result, { name: 'complete' })) {
 			mkdir('/.uploads/complete');
+		}
+
+		if (!_.find(result, { name: 'inprogress' })) {
+			mkdir('/.uploads/inprogress');
 		}
 	});
 }
