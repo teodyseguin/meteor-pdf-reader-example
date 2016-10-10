@@ -10,19 +10,58 @@ Pdf = Class.create({
 	name: 'Pdf',
 	collection: Pdfs,
 	fields: {
-		responseId: Number,
-		admissionServices: String,
-		friendlinessOfDoctors: String,
-		friendlinessOfNurses: String,
-		friendlinessOfAlliedHealth: String,
-		cleanlinessOfAccommodation: String,
-		qualityOfFoodDrinks: String,
-		dischargeServices: String,
-		firstName: String,
-		surName: String,
-		iStayInWard: Number,
-		compliment: String,
-		complaint: String,
+		responseId: {
+			type: Number,
+			default: 0
+		},
+		admissionServices: {
+			type: String,
+			default: ''
+		},
+		friendlinessOfDoctors: {
+			type: String,
+			default: ''
+		},
+		friendlinessOfNurses: {
+			type: String,
+			default: ''
+		},
+		friendlinessOfAlliedHealth: {
+			type: String,
+			default: ''
+		},
+		cleanlinessOfAccommodation: {
+			type: String,
+			default: ''
+		},
+		qualityOfFoodDrinks: {
+			type: String,
+			default: ''
+		},
+		dischargeServices: {
+			type: String,
+			default: ''
+		},
+		firstName: {
+			type: String,
+			default: ''
+		},
+		surName: {
+			type: String,
+			default: ''
+		},
+		iStayInWard: {
+			type: Number,
+			default: 0
+		},
+		compliment: {
+			type: String,
+			default: ''
+		},
+		complaint: {
+			type: String,
+			default: ''
+		},
 		provideMoreInfo: {
 			type: Boolean,
 			default: false
