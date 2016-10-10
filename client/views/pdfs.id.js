@@ -20,10 +20,12 @@ Template.pdfsId.events({
 		pdf.provideMoreInfo = event.target.form.providemoreinfo.checked;
 		pdf.attendPatientFocusGroup = event.target.form.attendpatientfocusgroup.checked;
 
-		DbService.save(pdf, function saveResponse(err) {
+		DbService.save(pdf, function saveResponse(err, result) {
 			if (err) {
 				alert('Something weng wrong, please try again');
 			}
+
+			console.log(result);
 		});
 	}
 });
