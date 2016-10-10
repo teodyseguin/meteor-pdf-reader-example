@@ -1,12 +1,10 @@
-let list = new ReactiveVar();
-
-Meteor.call('pdfList', (err, res) => {
-	list.set(res);
+Template.pdfsAll.onCreated(function() {
+	Meteor.subscribe('list.pdfs', ['uploaded']);
 });
 
 Template.pdfsAll.helpers({
-	list: function() {
-		return list.get();
+	list() {
+		return Uploads.find().fetch();
 	}
 });
 
