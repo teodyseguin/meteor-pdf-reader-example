@@ -1,14 +1,8 @@
 // meteor packages
 import { Meteor } from 'meteor/meteor';
-
-// npm packages
-import shelljs from 'shelljs/global';
-import pdfjsDist from 'pdfjs-dist';
-import fs from 'fs';
-import _ from 'lodash';
-
 // custom module
 import { DbService } from '../imports/services/db.js';
+import { PathService } from '../imports/services/path.js';
 
 /**
  * On startup of the server, we need to create
@@ -39,11 +33,11 @@ Meteor.startup(() => {
 	// we create some folders here and they are the
 	// - complete/
 	// - inprogress/
-	createFolders();
+	PathService.createFolders();
 });
 
 Meteor.publish('list.pdfs', function(status) {
-	return Uploads.find(
+	return Upload.find(
 		{
 			_id: { 
 				$exists: true 
@@ -57,39 +51,3 @@ Meteor.publish('list.pdfs', function(status) {
 		}
 	);
 });
-
-function listFiles(location, pdfOnly, callback) {
-	let files = [],
-		counter = 0;
-
-	ls(location).forEach((file, index, array) => {
-		let obj = {};
-		
-		if (pdfOnly) {
-			let data = new Uint8Array(fs.readFileSync(file));
-		
-			PDFJS.getDocument(data)
-				.then(pdfDocument => {
-					obj.count = pdfDocument.numPages;
-				});
-		}
-
-		obj.name = file;
-		obj.id = counter++;
-		files.push(obj);
-	});
-
-	return callback(files);
-}
-
-function createFolders() {
-	listFiles('/.uploads', false, (result) => {
-		if (!_.find(result, { name: 'complete' })) {
-			mkdir('/.uploads/complete');
-		}
-
-		if (!_.find(result, { name: 'inprogress' })) {
-			mkdir('/.uploads/inprogress');
-		}
-	});
-}
