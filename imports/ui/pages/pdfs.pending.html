@@ -1,0 +1,15 @@
+<template name="pdfsPending">
+  List of all pdf's
+  <ul class="pdflist">
+    {{#each file in list}}
+      <li>
+        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+        <span class="hidden">{{ file.filename }}</span>
+        <div class="button-inline">
+          <a href=/pdfs/{{ file._id }}/start class="start">Start</a>
+          <a href=/pdfs/{{ file._id }} class="view">View</a>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</template>
