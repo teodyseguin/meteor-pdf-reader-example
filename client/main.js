@@ -9,6 +9,8 @@ import '../imports/ui/pages/pdfs.pending.js';
 import '../imports/ui/pages/pdfs.inprogress.js';
 import '../imports/ui/pages/pdfs.complete.js';
 
+let totalUploads = 0;
+
 Template.mainContent.onCreated(function() {
 	Meteor.subscribe('list.pdfs', [
 		'pending', 
@@ -19,16 +21,31 @@ Template.mainContent.onCreated(function() {
 
 Template.mainContent.helpers({
 	pdfComplete: function() {
-		let result = Upload.find().fetch();
-		return _.filter(result, ['status', 'complete']).length;
+		let result = Upload.find().fetch(),
+			totalComplete = _.filter(result, ['status', 'complete']).length;
+
+		totalUploads += totalComplete;
+
+		return totalComplete;
 	},
 	pdfInProgress: function() {
-		let result = Upload.find().fetch();
-		return _.filter(result, ['status', 'inprogress']).length;
+		let result = Upload.find().fetch(),
+			totalInProgress = _.filter(result, ['status', 'inprogress']).length;
+
+		totalUploads += totalInProgress;
+
+		return totalInProgress;
 	},
 	pdfPending: function() {
-		let result = Upload.find().fetch();
-		return _.filter(result, ['status', 'pending']).length;
+		let result = Upload.find().fetch(),
+			totalPending = _.filter(result, ['status', 'pending']).length;
+
+		totalUploads += totalPending;
+
+		return totalPending;
+	},
+	pdfTotalUploads: function() {
+		return totalUploads;
 	}
 });
 
