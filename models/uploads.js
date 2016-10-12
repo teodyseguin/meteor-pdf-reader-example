@@ -14,7 +14,7 @@ Upload = Class.create({
 		filename: String,
 		status: {
 			type: String,
-			default: 'uploaded'
+			default: 'pending'
 		}
 	},
 	secured: false
