@@ -105,3 +105,10 @@ i.fa {
 	display: block;
 	border: 1px solid #cccccc;
 }
+
+#pdfcanvas.viewing {
+	float: left;
+	width: 100%;
+	display: block;
+	border: 1px solid #cccccc;
+}
