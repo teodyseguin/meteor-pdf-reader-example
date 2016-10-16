@@ -4,10 +4,11 @@ import { Template } from 'meteor/templating';
 import _ from 'lodash';
 // templates
 import './main.html';
-
+// UI imports
 import '../imports/ui/pages/pdfs.pending.js';
 import '../imports/ui/pages/pdfs.inprogress.js';
 import '../imports/ui/pages/pdfs.complete.js';
+import '../imports/ui/pages/pdfs.id.js';
 
 let totalUploads = 0;
 
@@ -19,6 +20,15 @@ Template.mainContent.onCreated(function() {
 	]);
 });
 
+/**
+ * Helper functions to get the total count of PDF's
+ * per complete, in progress and pending
+
+ * @TODO
+ * 1. on each of this helper, check to see if the file
+ * they are checking in from the database, also exists
+ * physically on the corresponding directory path
+ */
 Template.mainContent.helpers({
 	pdfComplete: function() {
 		let result = Upload.find().fetch(),
@@ -52,12 +62,5 @@ Template.mainContent.helpers({
 FlowRouter.route('/', {
 	action: () => {
 		BlazeLayout.render('mainLayout', { content: 'mainContent' });
-	}
-});
-
-FlowRouter.route('/pdfs/:pdfId', {
-	name: 'pdfs.id',
-	action: () => {
-		BlazeLayout.render('mainLayout', { content: 'pdfsId' });
 	}
 });
