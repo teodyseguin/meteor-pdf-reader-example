@@ -1,4 +1,5 @@
 import { DbService } from '../../services/db.js';
+import PdfViewer from '../../services/src/pdfviewer.js';
 import './pdfs.id.html';
 import './pdfs.id.viewing.html';
 
@@ -12,7 +13,22 @@ FlowRouter.route('/pdfs/:pdfId', {
 		// ?viewing=true if it's in the url, then we provide
 		// the proper template for viewing
 		if (queryParams.viewing) {
-			BlazeLayout.render('mainLayout', { content: 'pdfsId.viewing' })
+			// @TODO
+			// 1. Need to load the PDF viewer here - x
+			// 2. Need to use the pdfviewer.js to layout the pdf file
+			BlazeLayout.render('mainLayout', { content: 'pdfsId.viewing' });
+
+			// var staticHost = 'http://localhost:9000';
+
+			// // normal case
+			// var config1 = {
+			//   pdfUrl: '/.uploads/sample.pdf',
+			//   download: false,
+			//   staticHost: staticHost,
+			// };
+
+			// new PdfViewer(config1).embed(document.getElementById('pdfviewertest'));
+
 			return;
 		}
 
