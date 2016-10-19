@@ -1,7 +1,8 @@
-import shelljs from 'shelljs/global';
-import pdfjsDist from 'pdfjs-dist';
-import fs from 'fs';
 import _ from 'lodash';
+import fs from 'fs';
+import path from 'path';
+import pdfjsDist from 'pdfjs-dist';
+import shelljs from 'shelljs/global';
 
 class Path {
 	listFiles(location, pdfOnly, callback) {
@@ -28,15 +29,21 @@ class Path {
 		return callback(files);
 	}
 
-	createFolders() {
-		this.listFiles('/.uploads', false, (result) => {
-			if (!_.find(result, { name: 'complete' })) {
-				mkdir('/.uploads/complete');
-			}
+	createFolders(folders) {
+		let self = this,
+			uploadDirectory = path.resolve(process.env.HOMEPATH) + '/.uploads';
 
-			if (!_.find(result, { name: 'inprogress' })) {
-				mkdir('/.uploads/inprogress');
-			}
+		if (!folders.length) {
+			console.log('There are no folder names provided');
+			return;
+		}
+
+		folders.forEach(function(folder) {
+			self.listFiles(uploadDirectory, false, (result) => {
+				if (!_.find(result, { name: folder })) {
+					mkdir(uploadDirectory + '/' + folder);
+				}
+			});
 		});
 	}
 }
