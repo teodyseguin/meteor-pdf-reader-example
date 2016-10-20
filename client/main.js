@@ -30,7 +30,7 @@ Template.mainContent.onCreated(function() {
  * physically on the corresponding directory path
  */
 Template.mainContent.helpers({
-	pdfComplete: function() {
+	'pdfComplete'() {
 		let result = Upload.find().fetch(),
 			totalComplete = _.filter(result, ['status', 'complete']).length;
 
@@ -38,7 +38,7 @@ Template.mainContent.helpers({
 
 		return totalComplete;
 	},
-	pdfInProgress: function() {
+	'pdfInProgress'() {
 		let result = Upload.find().fetch(),
 			totalInProgress = _.filter(result, ['status', 'inprogress']).length;
 
@@ -46,7 +46,7 @@ Template.mainContent.helpers({
 
 		return totalInProgress;
 	},
-	pdfPending: function() {
+	'pdfPending'() {
 		let result = Upload.find().fetch(),
 			totalPending = _.filter(result, ['status', 'pending']).length;
 
@@ -54,11 +54,14 @@ Template.mainContent.helpers({
 
 		return totalPending;
 	},
-	pdfTotalUploads: function() {
-		return totalUploads;
+	'pdfTotalUploads'() {
+		return Upload.find().fetch().length;
 	}
 });
 
+/**
+ * This is the default route or the homepage route
+ */
 FlowRouter.route('/', {
 	action: () => {
 		BlazeLayout.render('mainLayout', { content: 'mainContent' });
