@@ -1,14 +1,12 @@
 import './pdfs.inprogress.html';
 
-let inProgress = new ReactiveVar();
-
-Meteor.call('pdfInProgress', (err, res) => {
-	inProgress.set(res);
+Template.pdfsInProgress.onCreated(function() {
+	Meteor.subscribe('list.pdfs', ['inprogress']);
 });
 
 Template.pdfsInProgress.helpers({
-	list: function() {
-		return inProgress.get();
+	list() {
+		return Upload.find().fetch();
 	}
 });
 
