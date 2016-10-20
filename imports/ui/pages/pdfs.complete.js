@@ -1,14 +1,12 @@
 import './pdfs.complete.html';
 
-let complete = new ReactiveVar();
-
-Meteor.call('pdfComplete', (err, res) => {
-	complete.set(res);
+Template.pdfsComplete.onCreated(function() {
+	Meteor.subscribe('list.pdfs', ['complete']);
 });
 
 Template.pdfsComplete.helpers({
-	list: function() {
-		return complete.get();
+	list() {
+		return Upload.find().fetch();
 	}
 });
 
