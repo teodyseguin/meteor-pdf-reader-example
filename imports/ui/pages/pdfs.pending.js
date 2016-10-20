@@ -1,7 +1,7 @@
 import './pdfs.pending.html';
 
 Template.pdfsPending.onCreated(function() {
-	Meteor.subscribe('list.pdfs', ['uploaded']);
+	Meteor.subscribe('list.pdfs', ['pending']);
 });
 
 Template.pdfsPending.helpers({
