@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "file-system": "^2.2.1",
+    "fs": "0.0.1-security",
     "lodash": "^4.16.4",
     "meteor-node-stubs": "^0.2.3",
     "path": "^0.12.7",
