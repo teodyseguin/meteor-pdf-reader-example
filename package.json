@@ -5,13 +5,19 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "events": "^1.1.1",
+    "fibers": "^1.0.15",
     "file-system": "^2.2.1",
     "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "https": "^1.0.0",
     "lodash": "^4.16.4",
     "meteor-node-stubs": "^0.2.3",
     "path": "^0.12.7",
     "pdfjs-dist": "^1.6.212",
     "shelljs": "^0.7.4",
+    "sys": "0.0.1",
+    "url": "^0.11.0",
     "xml2js": "^0.4.17"
   }
 }

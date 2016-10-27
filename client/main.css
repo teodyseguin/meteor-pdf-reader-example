@@ -87,6 +87,7 @@ i.fa {
 .button-inline a.start,
 .button-inline a.continue {
 	float: left;
+	cursor: pointer;
 }
 
 .button-inline a.view {
@@ -128,4 +129,14 @@ i.fa {
 	width: 100%;
 	height: 100%;
 	border: 0;
+}
+
+/**
+ * @TODO
+ * This is a hack style in order to hide the iron:router
+ * display template in the homepage. Will remove this out
+ * once I finally figure out, on how to deal with it
+ */
+#__blaze-root + div {
+	display: none;
 }

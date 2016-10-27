@@ -10,6 +10,19 @@ Template.pdfsPending.helpers({
 	}
 });
 
+Template.pdfsPending.events({
+	'click .start'(event) {
+		Meteor.call('startPdfProcess', event.target.dataset.id, (err, res) => {
+			if (err) {
+				console.log(err);
+				return;
+			}
+
+			FlowRouter.go('/pdfs/inprogress');
+		});
+	}
+});
+
 FlowRouter.route('/pdfs/pending', {
 	name: 'pdfs.all',
 	action: () => {

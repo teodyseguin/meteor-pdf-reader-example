@@ -8,7 +8,8 @@ import './main.html';
 import '../imports/ui/pages/pdfs.pending.js';
 import '../imports/ui/pages/pdfs.inprogress.js';
 import '../imports/ui/pages/pdfs.complete.js';
-import '../imports/ui/pages/pdfs.id.js';
+import '../imports/ui/pages/pdfs.id.viewing.js';
+import '../imports/ui/pages/pdfs.id.processing.js';
 
 let totalUploads = 0;
 

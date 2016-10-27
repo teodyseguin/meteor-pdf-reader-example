@@ -1,5 +1,7 @@
+import { Template } from 'meteor/templating';
+// custom services
 import { DbService } from '../../services/db.js';
-import PdfViewer from '../../services/src/pdfviewer.js';
+// ui templates
 import './pdfs.id.html';
 import './pdfs.id.viewing.html';
 
@@ -7,32 +9,24 @@ import './pdfs.id.viewing.html';
  * Route for serving individual PDF page
  */
 FlowRouter.route('/pdfs/:pdfId', {
-	name: 'pdfs.id',
+	name: 'pdfs.id.viewing',
 	action: (params, queryParams) => {
-		// for viewing the uploaded pdf, we check for the
-		// ?viewing=true if it's in the url, then we provide
-		// the proper template for viewing
-		if (queryParams.viewing) {
-			// @TODO
-			// 1. Need to load the PDF viewer here - x
-			// 2. Need to use the pdfviewer.js to layout the pdf file
-			BlazeLayout.render('mainLayout', { content: 'pdfsId.viewing' });
+		BlazeLayout.render('mainLayout', { content: 'pdfsId.viewing' });
+		// BlazeLayout.render('mainLayout', { content: 'pdfsId' });
+	}
+});
 
-			// var staticHost = 'http://localhost:9000';
+Template.pdfsId.onCreated(function() {
+	Meteor.subscribe('list.pdfs.id', ['hwtRx2SvHWMcYDHYj']);
+});
 
-			// // normal case
-			// var config1 = {
-			//   pdfUrl: '/.uploads/sample.pdf',
-			//   download: false,
-			//   staticHost: staticHost,
-			// };
-
-			// new PdfViewer(config1).embed(document.getElementById('pdfviewertest'));
-
-			return;
-		}
-
-		BlazeLayout.render('mainLayout', { content: 'pdfsId' });
+Template.pdfsId.helpers({
+	embedPdf() {
+		let result = Upload.findOne('hwtRx2SvHWMcYDHYj');
+		console.log(result);
+	},
+	testing() {
+		return 'testing';
 	}
 });
 

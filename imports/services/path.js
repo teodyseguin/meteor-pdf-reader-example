@@ -1,3 +1,4 @@
+// npm packages
 import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
@@ -44,6 +45,18 @@ class Path {
 					mkdir(uploadDirectory + '/' + folder);
 				}
 			});
+		});
+	}
+
+	moveFiles(files, destination) {
+		if (!files.length) {
+			console.log('There are no files to move.');
+			return;
+		}
+
+		files.forEach(function(file) {
+			console.log('moving ' + file + ' to ' + destination);
+			mv(file, destination);
 		});
 	}
 }
